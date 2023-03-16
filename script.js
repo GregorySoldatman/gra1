@@ -1,15 +1,18 @@
 const grid = document.querySelector('.game__grid')
 const startButton = document.querySelector('.game__start')
+const stopButton = document.querySelector('.game__stop')
 
 const cellArray = []
 let row = []
+
+let life
 
 for (let i = 1; i <= 2500; i++) {
     const cell = document.createElement('div')
     cell.setAttribute('id', 'c' + i)
     cell.classList.add('game__cell')
 
-    if (i % 1 == 0) {
+    if (i % 3 == 0) {
         cell.classList.add('alive')
     }
 
@@ -97,26 +100,29 @@ const tick = () => {
     let y = 0   // row number
     let x = 0   // position in the row
     let ln = 0  // living neighbours
-    
+
+    let newborn = []
+    let dying = []
+
     for (i = 1; i <= 2500; i++) {
         ln = checkNeighbours(y, x)
         if (cellArray[y][x].classList.contains('alive')) {
             if (ln < 2) {
-                cellArray[y][x].classList.remove('alive')
+                dying.push(cellArray[y][x])
             }
             else if (ln > 3) {
-                cellArray[y][x].classList.remove('alive')
+                dying.push(cellArray[y][x])
             }
-            else if (ln == 2 && ln == 3) {
+            else if (ln == 2 || ln == 3) {
                 // Do nothing
             }
             else {
-                cellArray[y][x].classList.remove('alive')
+                dying.push(cellArray[y][x])
             }
         }
         else {
             if (ln == 3) {
-                cellArray[y][x].classList.add('alive')
+                newborn.push(cellArray[y][x])
             }
             else {
                 // Do nothing
@@ -131,8 +137,18 @@ const tick = () => {
             x++
         }
     }
+    for (const cell of newborn) {
+        cell.classList.add('alive')
+    }
+    for (const cell of dying) {
+        cell.classList.remove('alive')
+    }
 }
 
 startButton.addEventListener('click', () => {
-    tick()
+    life = setInterval(() => {tick()}, 333)
+})
+
+stopButton.addEventListener('click', () => {
+    clearInterval(life)
 })
