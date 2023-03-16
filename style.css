@@ -29,8 +29,9 @@ body * {
 .game__grid {
     display: flex;
     flex-flow: row wrap;
-    width: 500px;
-    height: 500px;
+    width: 502px;
+    height: 502px;
+    border: solid 1px;
 }
 
 .game__cell {
@@ -38,4 +39,8 @@ body * {
     height: 10px;
     width: 10px;
     border: solid 1px;
+}
+
+.game__cell.alive {
+    background-color: crimson;
 }
