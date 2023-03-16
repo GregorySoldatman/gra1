@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+.game {
+    margin: 0 auto;
+    width: 500px;
+}
+
+.game__header {
+    text-align: center;
+}
+
+.game__buttons {
+    margin: 32px 0px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.game__buttons button:hover {
+    cursor: pointer;
+}
+
+.game__grid {
+    display: flex;
+    flex-flow: row wrap;
+    width: 500px;
+    height: 500px;
+}
+
+.game__cell {
+    margin: 0;
+    height: 10px;
+    width: 10px;
+    border: solid 1px;
+}
